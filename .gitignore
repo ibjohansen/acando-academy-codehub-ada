@@ -1,3 +1,4 @@
+#set up all files and folders that are NOT to be commited to Git
 dist
 build
 node_modules

@@ -24,6 +24,9 @@ The repo wil demonstrate the use of:
 * npm test:watch (run tests on file change)
 * npm test:coverage (generate test-coverage)
 
+## Linting with Airbnb's ESLint settings
+npm install --save-dev eslint-config-airbnb eslint@^4.8.0 eslint-plugin-jsx-a11y@^6.0.2 eslint-plugin-import@^2.7.0 eslint-plugin-react@^7.4.0
+
 ## Development
 * npm start
 * navigate to http://localhost:3000

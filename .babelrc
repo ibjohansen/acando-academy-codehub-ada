@@ -1,3 +1,4 @@
+//config for babel - that transpiles ES2015 code not covered in the browser, and JSX
 {
   "presets": ["env", "react"]
 }

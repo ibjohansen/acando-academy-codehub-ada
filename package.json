@@ -1,15 +1,15 @@
 {
-  "name": "ada",
+  "name": "ada-demo",
   "version": "1.0.0",
   "description": "Simple webapp demonstrating use of npm, webpack, eslint, unit-testing, css, images and react",
   "main": "index.js",
   "scripts": {
     "start": "",
     "Xpredev": "npm run lint & npm run test",
-    "dev": "webpack-dev-server",
+    "dev": "NODE_ENV=development node app.js",
     "build:": "",
     "build:prod": "",
-    "lint": "",
+    "lint": "eslint src app.js",
     "test": ""
   },
   "author": "Ib Johansen (ib.johansen@acando.no)",
@@ -22,14 +22,25 @@
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb": "^16.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "file-loader": "^1.1.4",
     "font-loader": "^0.1.2",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.9.1"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-hot-middleware": "^2.19.1"
   },
   "dependencies": {
     "express": "^4.16.2",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "request": "^2.83.0",
+    "request-promise-native": "^1.0.5"
   }
 }

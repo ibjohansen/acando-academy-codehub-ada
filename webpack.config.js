@@ -2,20 +2,21 @@ const path = require('path'); //NodeJS path module wich provides utilities for w
 const webpack = require('webpack');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/index.js'), //entry point for code-graph - https://webpack.js.org/concepts/#entry
+  entry: { //entry point for code-graph - https://webpack.js.org/concepts/#entry
+    app: ['webpack-hot-middleware/client', path.resolve(__dirname, 'src/index.jsx')]
+  },
   output: { //location of bundeled code - https://webpack.js.org/concepts/#output
     path: path.resolve(__dirname, 'dist'),
-    filename: 'ada.bundle.js'
-  },
-  devServer: {  // config object for webpack-dev-server - https://webpack.js.org/configuration/dev-server/
-    contentBase: path.resolve(__dirname, 'assets'),
-    compress: true,
-    port: 3000,
-    hot: true,
-    inline: true
+    filename: 'dist/ada.bundle.js',
+    publicPath: ''
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin() // webpacks plugin for hot reloading - https://webpack.js.org/plugins/hot-module-replacement-plugin
+    new webpack.HotModuleReplacementPlugin(), // webpacks plugin for hot reloading - https://webpack.js.org/plugins/hot-module-replacement-plugin
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('development')
+      }
+    })
   ],
   devtool: 'inline-source-map', //source map generation for debugging - https://webpack.js.org/configuration/devtool/
   module: { // https://webpack.js.org/concepts/modules/
@@ -24,14 +25,18 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
-      }
+      },
+      {
+        test: /.scss$/,
+        use: ["style-loader", "css-loader", "sass-loader"]
+      },
     ]
   },
   resolve: {  // resolving extensions and aliases - https://webpack.js.org/configuration/resolve/
-    extensions: ['.js', '.jsx', '.json'],
+    extensions: ['.js', '.jsx', '.json', '.scss'],
     alias: {
       components: path.resolve(__dirname, 'src/components'),
-      images: path.resolve(__dirname, 'src/images'),
+      server: path.resolve(__dirname, 'src/server'),
       scss: path.resolve(__dirname, 'src/scss')
     }
   }
