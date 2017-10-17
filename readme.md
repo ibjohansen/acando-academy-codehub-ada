@@ -16,11 +16,14 @@ The repo wil demonstrate the use of:
 ## Cloning
 * git clone git@github.com:ibjohansen/acando-academy-codehub-ada.git
 
+## Node
+* This repo is created with Node version 8.6.0 and npm 5.3.0
+
 ## Setup
 * npm install
 
 ## Testing
-* npm test (run jest & mocha) [edit?]
+* npm test (run jest & mocha)
 * npm test:watch (run tests on file change)
 * npm test:coverage (generate test-coverage)
 

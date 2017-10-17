@@ -7,7 +7,16 @@
       "modules": true
     }
   },
-  "rules": {},
+  "rules": {
+    "object-curly-spacing": 0,
+    "import/no-dynamic-require": 0,
+    "function-paren-newline": 0,
+    "comma-dangle": 0,
+    "arrow-parens": [
+      "error",
+      "always"
+    ]
+  },
   "extends": [
     "airbnb"
   ],

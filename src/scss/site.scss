@@ -24,22 +24,30 @@
   }
 }
 
-.loading{
+.loading {
   height: 100%;
-  display: flex!important;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   margin-top: 50%;
 }
 
-.cam{
+.cam {
+  border: 1px solid #9b4dca;
+  padding: 5px;
+  border-radius: 0.4rem;
+  margin-bottom: 10px;
+
   position: relative;
-  &.hidden{
-    //display: none;
+  &.hidden {
+    display: none;
   }
 
+  video {
+    margin-right: 10px;
+  }
 
-  .rect{
+  .rect {
     position: absolute;
     top: 5%;
     left: 5%;
@@ -47,5 +55,21 @@
     height: 150px;
     width: 110px;
     z-index: 99;
+  }
+}
+
+.calc {
+  display: none;
+  border: 1px solid #9b4dca;
+  border-radius: 0.4rem;
+  margin-bottom: 10px;
+  padding: 5px;
+
+  button {
+    margin-right: 2px;
+  }
+
+  input {
+    width: 20%;
   }
 }
