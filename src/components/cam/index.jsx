@@ -1,25 +1,33 @@
 /*
-This component is very hacky, both video/canvas and positioning of the rectangle is very shady with regards to the React env.
+This component is very hacky, both video/canvas and positioning of the
+rectangle is very shady with regards to the React env.
+
+Therefore also disabling linter in this
  */
+
+/* eslint-disable */
 
 import React from 'react';
 
 export default class Cam extends React.Component {
-
-  constructor() {
-    super();
-  }
-
   componentDidMount() {
     this.initVideo();
 
-    //hacky code - should be ported to react...
+
+    // hacky code - should be ported to react...
     const contextmenu = document.getElementById('snapshot-rect');
-    let initX, initY, mousePressX, mousePressY;
+    let initX,
+      initY,
+      mousePressX,
+      mousePressY;
 
-    //using function in order to preserve this
+    function repositionElement(event) {
+      this.style.left = `${initX + event.clientX - mousePressX}px`;
+      this.style.top = `${initY + event.clientY - mousePressY}px`;
+    }
+
+    // using function in order to preserve this
     contextmenu.addEventListener('mousedown', function (event) {
-
       initX = this.offsetLeft;
       initY = this.offsetTop;
       mousePressX = event.clientX;
@@ -27,16 +35,10 @@ export default class Cam extends React.Component {
 
       this.addEventListener('mousemove', repositionElement, false);
 
-      window.addEventListener('mouseup', function () {
+      window.addEventListener('mouseup', () => {
         contextmenu.removeEventListener('mousemove', repositionElement, false);
       }, false);
-
     }, false);
-
-    function repositionElement(event) {
-      this.style.left = initX + event.clientX - mousePressX + 'px';
-      this.style.top = initY + event.clientY - mousePressY + 'px';
-    }
   }
 
 
@@ -48,8 +50,8 @@ export default class Cam extends React.Component {
 
     const doSnapshot = () => {
       if (localMediaStream) {
-        const ol = document.getElementById("snapshot-rect").offsetLeft;
-        const ot = document.getElementById("snapshot-rect").offsetTop;
+        const ol = document.getElementById('snapshot-rect').offsetLeft;
+        const ot = document.getElementById('snapshot-rect').offsetTop;
         ctx.drawImage(videoElm, ol, ot, 110, 150, 0, 0, 110, 150);
       }
     };
@@ -65,7 +67,7 @@ export default class Cam extends React.Component {
     canvas.height = 240;
     canvas.width = 320;
 
-    document.getElementById("webcam-photo").addEventListener("click", doSnapshot);
+    document.getElementById('webcam-photo').addEventListener('click', doSnapshot);
 
     navigator.getUserMedia = navigator.getUserMedia
       || navigator.webkitGetUserMedia
@@ -96,11 +98,11 @@ export default class Cam extends React.Component {
     const classNameArray = ['cam', 'hidden'];
     return (
       <div className={classNameArray.join(' ')}>
-        <video autoPlay="true" id="webcam-video"/>
-        <div id="snapshot-rect" className="rect"/>
-        <canvas id="snapshot-canvas"/>
+        <video autoPlay="true" id="webcam-video" />
+        <div id="snapshot-rect" className="rect" />
+        <canvas id="snapshot-canvas" />
         <button id="webcam-photo" type="button" className="button">Ta bilde</button>
       </div>
-    )
+    );
   }
 }

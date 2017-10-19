@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      result: "",
+      result: '',
       x: 0,
       y: 0
     };
@@ -55,13 +55,25 @@ class Calculator extends React.Component {
     return (
       <div className="calculator-container calc">
         <h2>Calculator</h2>
-        <label>
+        <label htmlFor="num1">
           Number 1.
-          <input type="number" value={x} className="calculator-firstnumber" onChange={this.handleFirstNumber}/>
+          <input
+            id="num1"
+            type="number"
+            value={x}
+            className="calculator-firstnumber"
+            onChange={this.handleFirstNumber}
+          />
         </label>
-        <label>
+        <label htmlFor="num2">
           Number 2.
-          <input type="number" value={y} className="calculator-secondnumber" onChange={this.handleSecondNumber}/>
+          <input
+            id="num2"
+            type="number"
+            value={y}
+            className="calculator-secondnumber"
+            onChange={this.handleSecondNumber}
+          />
         </label>
         <div>
           <p>
@@ -71,10 +83,30 @@ class Calculator extends React.Component {
             </span>
           </p>
         </div>
-        <button className="button button-outline calculator-add" onClick={this.handleAdd}>Add</button>
-        <button className="button button-outline calculator-subtract" onClick={this.handleSubtract}>Subtract</button>
-        <button className="button button-outline calculator-multiply" onClick={this.handleMultiply}>Multiply</button>
-        <button className="button button-outline calculator-divide" onClick={this.handleDivide}>Divide</button>
+        <button
+          className="button button-outline calculator-add"
+          onClick={this.handleAdd}
+        >
+          Add
+        </button>
+        <button
+          className="button button-outline calculator-subtract"
+          onClick={this.handleSubtract}
+        >
+          Subtract
+        </button>
+        <button
+          className="button button-outline calculator-multiply"
+          onClick={this.handleMultiply}
+        >
+          Multiply
+        </button>
+        <button
+          className="button button-outline calculator-divide"
+          onClick={this.handleDivide}
+        >
+          Divide
+        </button>
       </div>
     );
   }

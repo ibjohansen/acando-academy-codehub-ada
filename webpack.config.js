@@ -33,11 +33,6 @@ module.exports = {
     ]
   },
   resolve: {  // resolving extensions and aliases - https://webpack.js.org/configuration/resolve/
-    extensions: ['.js', '.jsx', '.json', '.scss'],
-    alias: {
-      components: path.resolve(__dirname, 'src/components'),
-      server: path.resolve(__dirname, 'src/server'),
-      scss: path.resolve(__dirname, 'src/scss')
-    }
+    extensions: ['.js', '.jsx', '.json', '.scss']
   }
 };

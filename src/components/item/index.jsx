@@ -6,7 +6,7 @@ export default class Person extends React.Component {
     super();
     this.state = {
       editing: false,
-      person: {},
+      person: this.props.person,
       preEditPerson: {},
     };
     this.onToggleEditOn = this.onToggleEditOn.bind(this);
@@ -16,28 +16,18 @@ export default class Person extends React.Component {
     this.onChangeField = this.onChangeField.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      person: this.props.person
-    })
-  }
-
-  isEdited() {
-    return this.state.editing && !isEqual(this.state.person, this.state.preEditPerson);
-  }
-
   onToggleEditOn() {
     this.setState({
       editing: true,
       preEditPerson: Object.assign({}, this.state.person)
-    })
+    });
   }
 
   onToggleEditOff() {
     this.setState({
       editing: false,
       preEditPerson: {}
-    })
+    });
   }
 
   onToggleEditAbort() {
@@ -46,7 +36,7 @@ export default class Person extends React.Component {
         editing: false,
         person: this.state.preEditPerson,
         preEditPerson: {}
-      })
+      });
     }
   }
 
@@ -59,12 +49,12 @@ export default class Person extends React.Component {
   }
 
   onPostEdit() {
-    const person = this.state.person;
+    const {person} = this.state;
     return fetch(`/api/people/${person.key}`, {
       method: 'put',
       body: JSON.stringify(person),
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       }
     })
@@ -72,20 +62,25 @@ export default class Person extends React.Component {
         this.onToggleEditOff();
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error); // eslint-disable-line no-console
         this.onToggleEditOff();
-      })
+      });
   }
 
+  isEdited() {
+    return this.state.editing && !isEqual(this.state.person, this.state.preEditPerson);
+  }
+
+
   render() {
-    const person = this.state.person;
+    const {person} = this.state;
     const id = person.key;
     const menuClasses = `row menu ${this.isEdited() ? 'menu-visible' : 'menu-hidden'}`;
     return (
       <div className="container person">
         <div className="row">
           <div className="column column-75">
-            <form>
+            <div>
               <fieldset key={person.key}>
                 <label htmlFor={`name_${id}`}>Navn</label>
                 <input
@@ -95,7 +90,8 @@ export default class Person extends React.Component {
                   onClick={this.onToggleEditOn}
                   onChange={this.onChangeField}
                   type="text"
-                  value={person.name}/>
+                  value={person.name}
+                />
 
                 <label htmlFor={`email${id}`}>Epost</label>
                 <input
@@ -105,7 +101,8 @@ export default class Person extends React.Component {
                   onClick={this.onToggleEditOn}
                   onChange={this.onChangeField}
                   type="email"
-                  value={person.email}/>
+                  value={person.email}
+                />
 
                 <label htmlFor={`phone${id}`}>Telefon</label>
                 <input
@@ -115,21 +112,34 @@ export default class Person extends React.Component {
                   onClick={this.onToggleEditOn}
                   onChange={this.onChangeField}
                   type="text"
-                  value={person.phone}/>
+                  value={person.phone}
+                />
 
               </fieldset>
-            </form>
+            </div>
           </div>
           <div className="column column-25">
-            <img className="image float-right" src={person.image}/>
+            <img className="image float-right" src={person.image} alt="" />
           </div>
         </div>
         <div className={menuClasses}>
-          <button className="button button-outline" disabled={!this.isEdited()} onClick={this.onToggleEditAbort} id={id}>avbryt</button>
-          <button className="button button-outline" disabled={!this.isEdited()} onClick={this.onPostEdit} id={id}>lagre</button>
+          <button
+            className="button button-outline"
+            disabled={!this.isEdited()}
+            onClick={this.onToggleEditAbort}
+            id={id}
+          >avbryt
+          </button>
+          <button
+            className="button button-outline"
+            disabled={!this.isEdited()}
+            onClick={this.onPostEdit}
+            id={id}
+          >lagre
+          </button>
 
         </div>
       </div>
-    )
+    );
   }
 }

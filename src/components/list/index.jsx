@@ -10,9 +10,7 @@ export default class List extends React.Component {
   }
 
   componentDidMount() {
-    fetch('/api/people').then((data) => {
-      return data.json();
-    }).then((json) => {
+    fetch('/api/people').then((data) => data.json()).then((json) => {
       this.setState({
         data: json
       });
@@ -22,9 +20,7 @@ export default class List extends React.Component {
   render() {
     const people = this.state.data;
     if (people.length > 0) {
-      return people.map((person) => {
-        return <Person key={person.key} person={person}/>
-      });
+      return people.map((person) => <Person key={person.key} person={person} />);
     }
     return (
       <div className="container">
