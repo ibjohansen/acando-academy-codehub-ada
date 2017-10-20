@@ -5,6 +5,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const request = require('request-promise-native');
 const bodyParser = require('body-parser');
+const config = require('./config.json');
 
 const app = express(); // create the web app
 app.use(bodyParser.json());
@@ -36,7 +37,7 @@ app.get('/', (req, res) => {
 // catch GET requests to /api/people then call the api and load people resource
 app.get('/api/people', (req, res) => { // eslint-disable-line arrow-body-style
   return request({
-    uri: 'http://localhost:3333/people',
+    uri: `${config.backend}/${config.appId}/people`,
     json: true
   }).then((response) => {
     res.send(response);
@@ -47,7 +48,7 @@ app.get('/api/people', (req, res) => { // eslint-disable-line arrow-body-style
 app.put('/api/people/:id', (req, res) => {
   const {id} = req.params;
   return request({
-    uri: `http://localhost:3333/people/${id}`,
+    uri: `${config.backend}/${config.appId}/people/${id}`,
     method: 'PUT',
     body: req.body,
     json: true
@@ -60,7 +61,7 @@ app.put('/api/people/:id', (req, res) => {
 app.put('/api/people/:id/image', (req, res) => {
   const {id} = req.params;
   return request({
-    uri: `http://localhost:3333/people/${id}/image`,
+    uri: `${config.backend}/${config.appId}/people/${id}/image`,
     method: 'PUT',
     body: req.body,
     json: true
@@ -73,7 +74,7 @@ app.put('/api/people/:id/image', (req, res) => {
 app.delete('/api/people/:id', (req, res) => {
   const {id} = req.params;
   return request({
-    uri: `http://localhost:3333/people/${id}`,
+    uri: `${config.backend}/${config.appId}/people/${id}`,
     method: 'DELETE',
     json: true
   }).then((response) => {
