@@ -6,14 +6,25 @@ export default class Person extends React.Component {
     super();
     this.state = {
       editing: false,
-      person: this.props.person,
+      person: {},
       preEditPerson: {},
     };
     this.onToggleEditOn = this.onToggleEditOn.bind(this);
     this.onToggleEditOff = this.onToggleEditOff.bind(this);
     this.onToggleEditAbort = this.onToggleEditAbort.bind(this);
     this.onPostEdit = this.onPostEdit.bind(this);
+    this.onDeletePerson = this.onDeletePerson.bind(this);
     this.onChangeField = this.onChangeField.bind(this);
+    this.onShowCamClick = this.onShowCamClick.bind(this);
+    this.updatePerson = this.updatePerson.bind(this);
+  }
+
+  componentWillMount() {
+    this.updatePerson(this.props.person);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updatePerson(nextProps.person);
   }
 
   onToggleEditOn() {
@@ -48,10 +59,28 @@ export default class Person extends React.Component {
     this.setState(state);
   }
 
+  onDeletePerson() {
+    const {person} = this.state;
+    return fetch(`/api/people/${person.key}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        this.props.onUpdateList();
+      })
+      .catch((error) => {
+        console.error(error); // eslint-disable-line no-console
+        this.props.onUpdateList();
+      });
+  }
+
   onPostEdit() {
     const {person} = this.state;
     return fetch(`/api/people/${person.key}`, {
-      method: 'put',
+      method: 'PUT',
       body: JSON.stringify(person),
       headers: {
         Accept: 'application/json',
@@ -67,15 +96,24 @@ export default class Person extends React.Component {
       });
   }
 
+  onShowCamClick(e) {
+    this.props.onShowCamClickCallback(e.target.getAttribute('id'));
+  }
+
+  updatePerson(person) {
+    this.setState({
+      person
+    });
+  }
+
   isEdited() {
     return this.state.editing && !isEqual(this.state.person, this.state.preEditPerson);
   }
 
-
   render() {
     const {person} = this.state;
     const id = person.key;
-    const menuClasses = `row menu ${this.isEdited() ? 'menu-visible' : 'menu-hidden'}`;
+    const menuClasses = 'row menu';
     return (
       <div className="container person">
         <div className="row">
@@ -119,7 +157,7 @@ export default class Person extends React.Component {
             </div>
           </div>
           <div className="column column-25">
-            <img className="image float-right" src={person.image} alt="" />
+            <img className="image float-right" src={person.image} alt=""/>
           </div>
         </div>
         <div className={menuClasses}>
@@ -136,6 +174,18 @@ export default class Person extends React.Component {
             onClick={this.onPostEdit}
             id={id}
           >lagre
+          </button>
+          <button
+            className="button button-outline"
+            onClick={this.onShowCamClick}
+            id={id}
+          >bytt bilde
+          </button>
+          <button
+            className="button button-outline"
+            onClick={this.onDeletePerson}
+            id={id}
+          >slett
           </button>
 
         </div>

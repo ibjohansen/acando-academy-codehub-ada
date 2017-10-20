@@ -10,9 +10,16 @@ Therefore also disabling linter in this
 import React from 'react';
 
 export default class Cam extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      imgTaken: false
+    };
+    this.onUpdateImageClick = this.onUpdateImageClick.bind(this);
+  }
+
   componentDidMount() {
     this.initVideo();
-
 
     // hacky code - should be ported to react...
     const contextmenu = document.getElementById('snapshot-rect');
@@ -45,6 +52,8 @@ export default class Cam extends React.Component {
   initVideo() {
     const videoElm = document.getElementById('webcam-video');
     const canvas = document.getElementById('snapshot-canvas');
+    canvas.width = 110;
+    canvas.height = 150;
     const ctx = canvas.getContext('2d');
     let localMediaStream = null;
 
@@ -63,9 +72,6 @@ export default class Cam extends React.Component {
 
     const processVideoError = (e) => {
     };
-
-    canvas.height = 240;
-    canvas.width = 320;
 
     document.getElementById('webcam-photo').addEventListener('click', doSnapshot);
 
@@ -94,14 +100,54 @@ export default class Cam extends React.Component {
     }
   }
 
+  onUpdateImageClick() {
+    const canvas = document.getElementById('snapshot-canvas');
+    const imageDataUrl = canvas.toDataURL();
+    const {id} = this.props;
+
+    return fetch(`/api/people/${id}/image`, {
+      method: 'PUT',
+      body: JSON.stringify({imageDataUrl}),
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(() => {
+        console.log('image updated');
+        this.props.hideCamCallback();
+      })
+      .catch((error) => {
+        console.error(error); // eslint-disable-line no-console
+      });
+  }
+
   render() {
-    const classNameArray = ['cam', 'hidden'];
+    const {hidden} = this.props;
+    const classNameArray = ['container', 'cam-container', hidden ? 'hidden' : ''];
     return (
+
       <div className={classNameArray.join(' ')}>
-        <video autoPlay="true" id="webcam-video" />
-        <div id="snapshot-rect" className="rect" />
-        <canvas id="snapshot-canvas" />
-        <button id="webcam-photo" type="button" className="button">Ta bilde</button>
+        <div className="row">
+          <div className="column column-60 column-offset-20">
+            <div className="cam">
+              <video autoPlay="true" id="webcam-video"/>
+              <div id="snapshot-rect" className="rect"/>
+              <canvas id="snapshot-canvas"/>
+              <button
+                id="webcam-photo"
+                type="button"
+                className="button">Ta bilde
+              </button>
+              <button
+                id="webcam-photo-save"
+                type="button"
+                onClick={this.onUpdateImageClick}
+                className="button">Lagre bilde
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

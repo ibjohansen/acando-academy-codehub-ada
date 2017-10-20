@@ -9,7 +9,7 @@ import Calculator from './index';
 chai.use(chaiEnzyme());
 
 describe('<Calculator />', () => {
-  const wrapper = shallow(<Calculator />);
+  const wrapper = shallow(<Calculator/>);
   it('renders the <Calculator /> component', () => {
     expect(wrapper).to.have.length(1);
   });

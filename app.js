@@ -36,20 +36,45 @@ app.get('/', (req, res) => {
 // catch GET requests to /api/people then call the api and load people resource
 app.get('/api/people', (req, res) => { // eslint-disable-line arrow-body-style
   return request({
-    uri: 'http:// localhost:3333/people',
+    uri: 'http://localhost:3333/people',
     json: true
   }).then((response) => {
     res.send(response);
   }).catch((err) => console.log(err)); // eslint-disable-line no-console
 });
 
-// catch PUT requests to /api/people/id then call the api and save the person
+// catch PUT requests to /api/people/;id then call the api and save the person
 app.put('/api/people/:id', (req, res) => {
   const {id} = req.params;
   return request({
-    uri: `http:// localhost:3333/people/${id}`,
+    uri: `http://localhost:3333/people/${id}`,
     method: 'PUT',
     body: req.body,
+    json: true
+  }).then((response) => {
+    res.send(response);
+  }).catch((err) => console.log(err)); // eslint-disable-line no-console
+});
+
+// catch PUT requests to /api/people/:id/image then call the api and save the image
+app.put('/api/people/:id/image', (req, res) => {
+  const {id} = req.params;
+  return request({
+    uri: `http://localhost:3333/people/${id}/image`,
+    method: 'PUT',
+    body: req.body,
+    json: true
+  }).then((response) => {
+    res.send(response);
+  }).catch((err) => console.log(err)); // eslint-disable-line no-console
+});
+
+// remove item by id on people node
+app.delete('/api/people/:id', (req, res) => {
+  const {id} = req.params;
+  return request({
+    uri: `http://localhost:3333/people/${id}`,
+    method: 'DELETE',
     json: true
   }).then((response) => {
     res.send(response);

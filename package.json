@@ -8,7 +8,7 @@
     "start:dev": "NODE_ENV=development node app.js",
     "build:": "",
     "build:prod": "",
-    "lint": "eslint --ext:js, jsx src app.js --fix",
+    "lint": "eslint --ext:js, jsx src app.js",
     "test": "mocha --reporter spec ./src/**/*.test.js"
   },
   "author": "Ib Johansen (ib.johansen@acando.no)",
@@ -43,7 +43,6 @@
     "lodash": "^4.17.4",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0",

@@ -13,14 +13,6 @@
     button {
       margin-right: 2px;
     }
-
-    &.menu-visible {
-      visibility: visible;
-    }
-
-    &.menu-hidden {
-      visibility: hidden;
-    }
   }
 }
 
@@ -32,29 +24,43 @@
   margin-top: 50%;
 }
 
-.cam {
-  border: 1px solid #9b4dca;
-  padding: 5px;
-  border-radius: 0.4rem;
-  margin-bottom: 10px;
+.cam-container {
+  position: absolute;
+  background-color: rgba(222, 222, 222, 0.75);
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
 
-  position: relative;
   &.hidden {
     display: none;
   }
 
-  video {
-    margin-right: 10px;
-  }
+  .cam {
+    border: 1px solid #9b4dca;
+    padding: 5px;
+    border-radius: 0.4rem;
+    margin-bottom: 10px;
 
-  .rect {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    border: 5px solid yellow;
-    height: 150px;
-    width: 110px;
-    z-index: 99;
+    position: relative;
+
+    video {
+      margin-right: 10px;
+    }
+
+    .rect {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      border: 5px solid yellow;
+      height: 150px;
+      width: 110px;
+      z-index: 99;
+    }
   }
 }
 
