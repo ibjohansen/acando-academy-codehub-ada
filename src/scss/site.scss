@@ -26,7 +26,7 @@
 
 .cam-container {
   position: absolute;
-  background-color: rgba(222, 222, 222, 0.75);
+  background-color: rgba(102, 102, 102, 0.85);
   top: 0;
   left: 0;
   display: flex;
@@ -41,8 +41,9 @@
   }
 
   .cam {
+    background-color: white;
     border: 1px solid #9b4dca;
-    padding: 5px;
+    padding: 15px;
     border-radius: 0.4rem;
     margin-bottom: 10px;
 
@@ -60,6 +61,16 @@
       height: 150px;
       width: 110px;
       z-index: 99;
+    }
+
+    .menu {
+
+      margin-bottom: 5px;
+      margin-top: 5px;
+
+      button {
+        margin-right: 2px;
+      }
     }
   }
 }

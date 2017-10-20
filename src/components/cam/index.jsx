@@ -123,7 +123,7 @@ export default class Cam extends React.Component {
   }
 
   render() {
-    const {hidden} = this.props;
+    const {hidden, hideCamCallback} = this.props;
     const classNameArray = ['container', 'cam-container', hidden ? 'hidden' : ''];
     return (
 
@@ -134,17 +134,25 @@ export default class Cam extends React.Component {
               <video autoPlay="true" id="webcam-video"/>
               <div id="snapshot-rect" className="rect"/>
               <canvas id="snapshot-canvas"/>
-              <button
-                id="webcam-photo"
-                type="button"
-                className="button">Ta bilde
-              </button>
-              <button
-                id="webcam-photo-save"
-                type="button"
-                onClick={this.onUpdateImageClick}
-                className="button">Lagre bilde
-              </button>
+              <div className="menu">
+                <button
+                  id="webcam-photo"
+                  type="button"
+                  className="button button-outline">Ta bilde
+                </button>
+                <button
+                  id="webcam-photo-save"
+                  type="button"
+                  onClick={this.onUpdateImageClick}
+                  className="button button-outline">Lagre bilde
+                </button>
+                <button
+                  id="webcam-photo-save"
+                  type="button"
+                  onClick={hideCamCallback}
+                  className="button button-outline">Lukk
+                </button>
+              </div>
             </div>
           </div>
         </div>
