@@ -11,7 +11,7 @@ The repo wil demonstrate the use of:
 * Bundling with Webpack
 * Coding with JavaScript (ES2015) and React
 * Assuring code quality with ESLint 
-* Testing code with Mocha and Expect.js
+* Testing code with Mocha, Chai, Enzyme and Jest
 
 ## Cloning
 * git clone git@github.com:ibjohansen/acando-academy-codehub-ada.git
@@ -25,14 +25,15 @@ The repo wil demonstrate the use of:
 ## Testing
 * npm test (run jest & mocha)
 * npm test:watch (run tests on file change)
-* npm test:coverage (generate test-coverage)
 
 ## Linting with Airbnb's ESLint settings
-npm install --save-dev eslint-config-airbnb eslint@^4.8.0 eslint-plugin-jsx-a11y@^6.0.2 eslint-plugin-import@^2.7.0 eslint-plugin-react@^7.4.0
+* npm lint
+ ()npm install --save-dev eslint-config-airbnb eslint@^4.8.0 eslint-plugin-jsx-a11y@^6.0.2 eslint-plugin-import@^2.7.0 eslint-plugin-react@^7.4.0)
 
 ## Development
-* npm start
+* npm start:dev
 * navigate to http://localhost:3000
+* for local development you either need to 
 
 ## Production
 * NODE_ENV=production npm run build:prod [edit?]
