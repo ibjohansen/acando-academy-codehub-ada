@@ -1,11 +1,11 @@
-const path = require('path'); //NodeJS path module wich provides utilities for working with file and directory paths
+const path = require('path'); // NodeJS path module wich provides utilities for working with file and directory paths
 const webpack = require('webpack');
 
 module.exports = {
-  entry: { //entry point for code-graph - https://webpack.js.org/concepts/#entry
+  entry: { // entry point for code-graph - https://webpack.js.org/concepts/#entry
     app: ['webpack-hot-middleware/client', path.resolve(__dirname, 'src/index.jsx')]
   },
-  output: { //location of bundeled code - https://webpack.js.org/concepts/#output
+  output: { // location of bundeled code - https://webpack.js.org/concepts/#output
     path: path.resolve(__dirname, 'dist'),
     filename: 'dist/ada.bundle.js',
     publicPath: ''
@@ -18,7 +18,7 @@ module.exports = {
       }
     })
   ],
-  devtool: 'inline-source-map', //source map generation for debugging - https://webpack.js.org/configuration/devtool/
+  devtool: 'inline-source-map', // source map generation for debugging - https://webpack.js.org/configuration/devtool/
   module: { // https://webpack.js.org/concepts/modules/
     rules: [
       {
@@ -28,11 +28,11 @@ module.exports = {
       },
       {
         test: /.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
     ]
   },
-  resolve: {  // resolving extensions and aliases - https://webpack.js.org/configuration/resolve/
+  resolve: { // resolving extensions and aliases - https://webpack.js.org/configuration/resolve/
     extensions: ['.js', '.jsx', '.json', '.scss']
   }
 };
