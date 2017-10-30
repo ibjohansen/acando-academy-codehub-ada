@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const config = require('./config.json');
 
 const app = express(); // create the web app
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // use body parser middleware for parsing body on ajax-requests
 const isProduction = process.env.NODE_ENV === 'production';
 const webpackConfig = require(path.resolve(__dirname, 'webpack.config')); // import the webpack config
 
