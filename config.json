@@ -1,4 +1,4 @@
 {
-  "appId": "app-000001", // app-id, used to identiify top app node on firebase
-  "backend": "https://codehub-backend.herokuapp.com" // endpoint to backend
+  "appId": "app-000001",
+  "backend": "https://codehub-backend.herokuapp.com"
 }
