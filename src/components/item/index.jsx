@@ -119,45 +119,11 @@ export default class Person extends React.Component {
         <div className="row">
           <div className="column column-75">
             <div>
-              <fieldset key={person.key}>
-                <label htmlFor={`name_${id}`}>Navn</label>
-                <input
-                  id={`name_${id}`}
-                  readOnly={!this.state.editing}
-                  name="name"
-                  onClick={this.onToggleEditOn}
-                  onChange={this.onChangeField}
-                  type="text"
-                  value={person.name}
-                />
-
-                <label htmlFor={`email${id}`}>Epost</label>
-                <input
-                  id={`email${id}`}
-                  readOnly={!this.state.editing}
-                  name="email"
-                  onClick={this.onToggleEditOn}
-                  onChange={this.onChangeField}
-                  type="email"
-                  value={person.email}
-                />
-
-                <label htmlFor={`phone${id}`}>Telefon</label>
-                <input
-                  id={`phone${id}`}
-                  readOnly={!this.state.editing}
-                  name="phone"
-                  onClick={this.onToggleEditOn}
-                  onChange={this.onChangeField}
-                  type="text"
-                  value={person.phone}
-                />
-
-              </fieldset>
+              { /* PERSONKORT HER */ }
             </div>
           </div>
           <div className="column column-25">
-            <img className="image float-right" src={person.image} alt=""/>
+            { /* BILDE HER */ }
           </div>
         </div>
         <div className={menuClasses}>

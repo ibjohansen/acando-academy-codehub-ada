@@ -43,22 +43,10 @@ export default class List extends React.Component {
   }
 
   render() {
-    const people = this.state.data;
-    if (people.length > 0) {
-      return people.map((person) => (
-        <Person
-          key={person.key}
-          person={person}
-          onShowCamClickCallback={this.onShowCamClickCallback}
-          onHideCamClickCallback={this.onHideCamClickCallback}
-          onUpdateList={this.onUpdateList}
-        />
-      ));
-    }
     return (
       <div className="container">
         <div className="row">
-          <div className="column column-100 loading"> Laster ...</div>
+          <div className="column column-100 loading">her bør det vises en liste med personer...</div>
         </div>
       </div>
     );
