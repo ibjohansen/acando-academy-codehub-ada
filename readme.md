@@ -16,6 +16,11 @@ The repo wil demonstrate the use of:
 ## Cloning
 * git clone git@github.com:ibjohansen/acando-academy-codehub-ada.git
 
+## Full source, simple-task, advanced task
+* the master branch is the full source - code
+* the simple-nolist-no-person branch has some JSX in the list and item component removed
+* the advanced-no-react-list-and-person branch has most JSX and logic removed from the list and item component
+
 ## Node
 * This repo is created with Node version 8.6.0 and npm 5.3.0
 
